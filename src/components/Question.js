@@ -2,7 +2,7 @@ import { useQuizContext } from '../context/QuizContext';
 import Options from './Options';
 
 function Question() {
-  const { answer, curQuestion, dispatch } = useQuizContext();
+  const { curQuestion } = useQuizContext();
   return (
     <div>
       <h4>{curQuestion.question}</h4>
