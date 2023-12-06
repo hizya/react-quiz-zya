@@ -117,16 +117,27 @@ function QuizProvider({ children }) {
   }, []);
 
   return (
-    <QuizContext.QuizProvider
-      value={{ status, numQuestions, totalScore, curQuestion, dispatch }}
+    <QuizContext.Provider
+      value={{
+        status,
+        numQuestions,
+        totalScore,
+        curQuestion,
+        dispatch,
+        answer,
+        points,
+        highScore,
+        secondsRemaining,
+        curIndex,
+      }}
     >
       {children}
-    </QuizContext.QuizProvider>
+    </QuizContext.Provider>
   );
 }
 
 function useQuizContext() {
-  const context = useContext();
+  const context = useContext(QuizContext);
 
   if (context === undefined)
     throw new Error('you use the QuizContext outside the provider');

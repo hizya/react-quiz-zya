@@ -1,4 +1,7 @@
-function ResultScore({ points, totalScore, highScore, dispatch }) {
+import { useQuizContext } from '../context/QuizContext';
+
+function ResultScore() {
+  const { points, totalScore, highScore, dispatch } = useQuizContext();
   const percentage = Math.ceil((points / totalScore) * 100);
 
   let emoji;

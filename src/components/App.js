@@ -1,4 +1,3 @@
-import { useEffect, useReducer } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Start from './Start';
@@ -10,50 +9,29 @@ import ResultScore from './ResultScore';
 import Footer from './Footer';
 import Timer from './Timer';
 import NextButton from './NextButton';
+import { useQuizContext } from '../context/QuizContext';
 
 export default function App() {
+  const { status } = useQuizContext();
+
   return (
     <div className="app">
       <Header />
       <Main>
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
-        {status === 'ready' && (
-          <Start dispatch={dispatch} numQuestions={numQuestions} />
-        )}
+        {status === 'ready' && <Start />}
         {status === 'active' && (
           <>
-            <Progress
-              points={points}
-              totalScore={totalScore}
-              numQuestions={numQuestions}
-              curIndex={curIndex}
-              answer={answer}
-            />
-            <Question
-              curQuestion={curQuestion}
-              dispatch={dispatch}
-              answer={answer}
-            />
+            <Progress />
+            <Question />
             <Footer>
-              <Timer secondsRemaining={secondsRemaining} dispatch={dispatch} />
-              <NextButton
-                dispatch={dispatch}
-                answer={answer}
-                numQuestions={numQuestions}
-                curIndex={curIndex}
-              />
+              <Timer />
+              <NextButton />
             </Footer>
           </>
         )}
-        {status === 'finished' && (
-          <ResultScore
-            points={points}
-            totalScore={totalScore}
-            highScore={highScore}
-            dispatch={dispatch}
-          />
-        )}
+        {status === 'finished' && <ResultScore />}
       </Main>
     </div>
   );
